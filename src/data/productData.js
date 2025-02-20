@@ -104,8 +104,8 @@ function getImageUrl(category, index) {
         ],
         accessories: [
             'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1608164415250-7d9a3cd0d3f8?w=500&h=500&fit=crop',
-            'https://images.unsplash.com/photo-1625799406018-c558d83f5b51?w=500&h=500&fit=crop',
+            'https://images.unsplash.com/photo-1706275400998-7fc21c8cd8ed?q=80&w=2080&fit=crop',
+            'https://images.unsplash.com/photo-1596207891316-23851be3cc20?q=80&w=1935&fit=crop',
             'https://images.unsplash.com/photo-1601524909162-ae8725290836?w=500&h=500&fit=crop'   
         ],
         audio: [

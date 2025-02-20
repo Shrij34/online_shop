@@ -3,7 +3,7 @@ FROM node:18-alpine as builder
 
 # Add maintainer info
 LABEL maintainer="Shrinivas Joshi"
-LABEL description="Online_shop Frontend - A Next.js E-commerce Application"
+LABEL description="Online_shop Frontend - A Node.js E-commerce Application"
 LABEL version="1.0"
 
 # Set working directory

@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'shrij34/online_shop:latest'  // Change this to your Docker Hub repo
+        GIT_CREDENTIALS_ID = 'git-credentials'
         //RECIPIENT_EMAIL = 'your-email@example.com'  // Replace with your email address
     }
 
@@ -10,7 +11,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning Repository...'
-                git 'https://github.com/Shrij34/online_shop.git'
+                GIT_CREDENTIALS_ID = 'git-credentials' url: 'https://github.com/Shrij34/online_shop.git'
             }
         }
 

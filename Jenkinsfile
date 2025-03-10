@@ -11,7 +11,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning Repository...'
-                git branch: 'main', credentialsId: "${env.GIT_CREDENTIALS_ID}", url:'https://github.com/Shrij34/online_shop.git'
+                git branch: 'Hackathon', credentialsId: "${env.GIT_CREDENTIALS_ID}", url:'https://github.com/Shrij34/online_shop.git'
             }
         }
 

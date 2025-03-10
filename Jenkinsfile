@@ -59,6 +59,7 @@ pipeline {
                 echo 'Deploying to KinD Cluster...'
                 sh 'kubectl apply -f kubernetes/deployment.yaml'
                 sh 'kubectl apply -f kubernetes/service.yaml'
+                sh 'kubectl apply -f kubernetes/ingress.yaml'
             }
         }
     }
@@ -68,7 +69,7 @@ pipeline {
             // In Manage Credentials => Global credentials 
             //  Kind: Secret text Secret: "Your mail id here " 
             // ID: RECIPIENT_EMAIL (you can choose any ID)
-            
+
             echo 'Pipeline completed successfully!'
             mail to: "$RECIPIENT_EMAIL",
                  subject: "Jenkins Pipeline Success",

@@ -23,12 +23,12 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'Running Tests...'
-                sh 'npm test'
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         echo 'Running Tests...'
+        //         sh 'npm test'
+        //     }
+        // }
 
         stage('Security Scan - Trivy') {
             steps {

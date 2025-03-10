@@ -3,15 +3,13 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'shrij34/online_shop:latest'  // Change this to your Docker Hub repo
-        GIT_CREDENTIALS_ID = 'git-credentials'
-        //RECIPIENT_EMAIL = 'your-email@example.com'  // Replace with your email address
     }
 
     stages {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning Repository...'
-                git branch: 'Hackathon', credentialsId: "${env.GIT_CREDENTIALS_ID}", url:'https://github.com/Shrij34/online_shop.git'
+                git branch: 'Hackathon', credentialsId: "${env.git-credentials}", url:'https://github.com/Shrij34/online_shop.git'
             }
         }
 
@@ -23,26 +21,26 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         echo 'Running Tests...'
-        //         sh 'npm test'
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo 'Running Tests...'
+                sh 'npm test'
+            }
+        }
 
-        // stage('Security Scan - Trivy') {
-        //     steps {
-        //         echo 'Running Trivy Scan...'
-        //         sh 'trivy filesystem --exit-code 1 --severity HIGH,CRITICAL ./'
-        //     }
-        // }
+        stage('Security Scan - Trivy') {
+            steps {
+                echo 'Running Trivy Scan...'
+                sh 'trivy filesystem --exit-code 1 --severity HIGH,CRITICAL ./'
+            }
+        }
 
-        // stage('Security Scan - OWASP Dependency Check') {
-        //     steps {
-        //         echo 'Running OWASP Dependency Check...'
-        //         sh 'dependency-check.sh --project online_shop --scan ./ --format ALL'
-        //     }
-        // }
+        stage('Security Scan - OWASP Dependency Check') {
+            steps {
+                echo 'Running OWASP Dependency Check...'
+                sh 'dependency-check.sh --project online_shop --scan ./ --format ALL'
+            }
+        }
 
         stage('Docker Build & Push') {
             steps {
@@ -56,27 +54,33 @@ pipeline {
             }
         }
 
-        // stage('Deploy to KinD') {
-        //     steps {
-        //         echo 'Deploying to KinD Cluster...'
-        //         sh 'kubectl apply -f kubernetes/deployment.yaml'
-        //         sh 'kubectl apply -f kubernetes/service.yaml'
-        //     }
-        // }
+        stage('Deploy to KinD') {
+            steps {
+                echo 'Deploying to KinD Cluster...'
+                sh 'kubectl apply -f kubernetes/deployment.yaml'
+                sh 'kubectl apply -f kubernetes/service.yaml'
+            }
+        }
     }
 
-    // post {
-    //     success {
-    //         echo 'Pipeline completed successfully!'
-    //         mail to: "$RECIPIENT_EMAIL",
-    //              subject: "Jenkins Pipeline Success",
-    //              body: "The CI/CD pipeline has completed successfully."
-    //     }
-    //     failure {
-    //         echo 'Pipeline failed. Check console output for details.'
-    //         mail to: "$RECIPIENT_EMAIL",
-    //              subject: "Jenkins Pipeline Failure",
-    //              body: "The CI/CD pipeline has failed. Please check Jenkins for details."
-    //     }
-    // }
+    post {
+        success {
+            // In Manage Credentials => Global credentials 
+            //  Kind: Secret text Secret: "Your mail id here " 
+            // ID: RECIPIENT_EMAIL (you can choose any ID)
+            
+            echo 'Pipeline completed successfully!'
+            mail to: "$RECIPIENT_EMAIL",
+                 subject: "Jenkins Pipeline Success",
+                 body: "The CI/CD pipeline has completed successfully."
+        }
+        failure {
+            echo 'Pipeline failed. Check console output for details.'
+            mail to: "$RECIPIENT_EMAIL",
+                 subject: "Jenkins Pipeline Failure",
+                 body: "The CI/CD pipeline has failed. Please check Jenkins for details."
+        }
+    }
 }
+
+

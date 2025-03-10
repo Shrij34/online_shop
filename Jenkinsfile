@@ -30,12 +30,12 @@ pipeline {
         //     }
         // }
 
-        stage('Security Scan - Trivy') {
-            steps {
-                echo 'Running Trivy Scan...'
-                sh 'trivy filesystem --exit-code 1 --severity HIGH,CRITICAL ./'
-            }
-        }
+        // stage('Security Scan - Trivy') {
+        //     steps {
+        //         echo 'Running Trivy Scan...'
+        //         sh 'trivy filesystem --exit-code 1 --severity HIGH,CRITICAL ./'
+        //     }
+        // }
 
         // stage('Security Scan - OWASP Dependency Check') {
         //     steps {

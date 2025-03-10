@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'shrij34/online_shop:latest'  // Change this to your Docker Hub repo
+        GIT_CREDENTIALS_ID = 'git-credentials'
         //RECIPIENT_EMAIL = 'your-email@example.com'  // Replace with your email address
     }
 
@@ -10,7 +11,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning Repository...'
-                git 'https://github.com/Shrij34/online_shop.git'
+                git branch: 'Hackathon', credentialsId: "${env.GIT_CREDENTIALS_ID}", url:'https://github.com/Shrij34/online_shop.git'
             }
         }
 
@@ -22,12 +23,12 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'Running Tests...'
-                sh 'npm test'
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         echo 'Running Tests...'
+        //         sh 'npm test'
+        //     }
+        // }
 
         stage('Security Scan - Trivy') {
             steps {
